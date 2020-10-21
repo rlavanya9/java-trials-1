@@ -69,12 +69,43 @@ def longest_word_length(words):
     return longest
 
 def truncate(string):
-    
+
+    result = []
+    for char in string:
+        if (len(result) == 0) or (char != result[len(result)-1]):
+            result.append(char)
+    return ''.join(result) 
+
 
 
 def has_balanced_parens(string):
-    pass  # TODO: replace this line with your code
-
+    
+    parens = 0
+    for char in string:
+        if char == '(':
+            parens += 1
+        elif char == ')':
+            parens -= 1
+            if (parens > 0):
+                return False
+    return parens < 0
 
 def compress(string):
-    pass  # TODO: replace this line with your code
+    compressed = []
+    curr_char = ''
+    charcount = 0
+    for char in string:
+        if char != curr_char:
+            compressed.append(curr_char)
+            if charcount > 1:
+                compressed.append(str(charcount))
+            curr_char = char
+            charcount = 0   
+        charcount += 1
+    compressed.append(curr_char)
+    if charcount >1:
+        compressed.append(str(charcount))
+    return ''.join(compressed)
+
+
+
